@@ -1,0 +1,6 @@
+--------------------  
+|oooooooooooooooxxxx  
+|xxxxxxooooooooox  x  
+|     xoooooooooxxxx  
+|     xoooooooooooo|  
+--------------------  
