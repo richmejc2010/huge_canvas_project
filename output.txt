@@ -1,6 +1,6 @@
---------------------  
-|oooooooooooooooxxxx  
-|xxxxxxooooooooox  x  
-|     xoooooooooxxxx  
-|     xoooooooooooo|  
---------------------  
+-------------------------------------------------  
+|oooooooooooooooxxxooooooooooooooooooooooooooooo|  
+|xxxxxxooooooooox xooooooooooooooooooooooooooooo|  
+|     xoooooooooxxxooooooooooooooooooooooooooooo|  
+|     xooooooooooooooooooooooooooooooooooooooooo|  
+-------------------------------------------------  

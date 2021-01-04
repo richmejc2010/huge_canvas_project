@@ -1,8 +1,5 @@
 import com.co.huge.constants.CanvasConstants;
-import com.co.huge.steps.CreateBucketFill;
-import com.co.huge.steps.CreateLine;
-import com.co.huge.steps.CreateModifyCanvas;
-import com.co.huge.steps.CreateRectangle;
+import com.co.huge.steps.*;
 import com.co.huge.utils.CanvasSingleton;
 import com.co.huge.utils.UtilsCanvas;
 import com.sun.org.slf4j.internal.Logger;
@@ -44,6 +41,7 @@ public class InitCanvasProject {
                                 canvasSingleton.setCanvas_x(canvas_x);
                                 canvasSingleton.setCanvas_y(canvas_y);
                                 canvasSingleton.setShape(canvas.shape);
+                                new PrintCanvas();
                             }
                         } catch (NumberFormatException e) {
                             System.out.println("Draw Canvas. params are not numbers: "+e.toString());
@@ -65,6 +63,7 @@ public class InitCanvasProject {
                                 if(createLine.validate(params, canvasSingleton.getCanvas_x(), canvasSingleton.getCanvas_y())){
                                     createLine.shape = canvasSingleton.getShape();
                                     createLine.getLine(params);
+                                    new PrintCanvas();
                                 }
                             }
                         } catch (NumberFormatException e) {
@@ -87,6 +86,7 @@ public class InitCanvasProject {
                                 if(createRectangle.validate(params, canvasSingleton.getCanvas_x(), canvasSingleton.getCanvas_y())){
                                     createRectangle.shape = canvasSingleton.getShape();
                                     createRectangle.getRectangle(params);
+                                    new PrintCanvas();
                                 }
                             }
                         } catch (NumberFormatException e) {
@@ -96,33 +96,40 @@ public class InitCanvasProject {
                         }
                         break;
                     case "B":
-                        if (params.length == 3) {
-                            System.out.println("Draw Bucket Fill expects 3 params");
-                        } else {
-                            CanvasSingleton canvasSingleton = CanvasSingleton.getInstance();
+                        try {
+                            if (params.length == 3) {
+                                System.out.println("Draw Bucket Fill expects 3 params");
+                            } else {
+                                CanvasSingleton canvasSingleton = CanvasSingleton.getInstance();
 
-                            if (canvasSingleton.getCanvas_x() == -1) {
-                                System.out.println("Mandatory to create a canvas first");
+                                if (canvasSingleton.getCanvas_x() == -1) {
+                                    System.out.println("Mandatory to create a canvas first");
+                                }
+                                CreateBucketFill createBucketFill = new CreateBucketFill(canvasSingleton.getCanvas_x(), canvasSingleton.getCanvas_y());
+                                if(createBucketFill.validate(params)){
+                                    createBucketFill.shape = canvasSingleton.getShape();
+                                    createBucketFill.create(params);
+                                    new PrintCanvas();
+                                }
                             }
-                            CreateBucketFill createBucketFill = new CreateBucketFill(canvasSingleton.getCanvas_x(), canvasSingleton.getCanvas_y());
-                            if(createBucketFill.validate(params)){
-                                createBucketFill.shape = canvasSingleton.getShape();
-                                createBucketFill.create(params);
-                            }
+                        } catch (NumberFormatException e) {
+                            System.out.println("Draw BucketFill. params are not numbers: "+e.toString());
+                        } catch (Exception e) {
+                            System.out.println("Draw BucketFill Error: "+e.toString());
                         }
                         break;
-                    case "P":
-                        File outputFile = new File("C:\\Users\\richardpaul.mejia\\z_Personal_stuff\\Huge\\code\\output.txt");
-//                        File outputFile = new File(configProperty.getProperty(CanvasConstants.OUTPUT_FILE));
-                        if(outputFile.delete()){
-                            outputFile.createNewFile();
-                        }
-                        UtilsCanvas utilsCanvas = new UtilsCanvas();
-                        CanvasSingleton canvasSingleton = CanvasSingleton.getInstance();
-                        utilsCanvas.shape = canvasSingleton.getShape();
-                        PrintWriter writer = new PrintWriter(outputFile);
-                        writer.print(utilsCanvas.getShapeAsString());
-                        writer.close();
+//                    case "PP":
+//                        File outputFile = new File("C:\\Users\\richardpaul.mejia\\z_Personal_stuff\\Huge\\code\\output.txt");
+///*                        File outputFile = new File(configProperty.getProperty(CanvasConstants.OUTPUT_FILE));*/
+//                        if(outputFile.delete()){
+//                            outputFile.createNewFile();
+//                        }
+//                        UtilsCanvas utilsCanvas = new UtilsCanvas();
+//                        CanvasSingleton canvasSingleton = CanvasSingleton.getInstance();
+//                        utilsCanvas.shape = canvasSingleton.getShape();
+//                        PrintWriter writer = new PrintWriter(outputFile);
+//                        writer.print(utilsCanvas.getShapeAsString());
+//                        writer.close();
                 }
             }
         }catch(IOException io){
